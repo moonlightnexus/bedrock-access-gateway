@@ -28,6 +28,5 @@ jobs:
           -f ./src/Dockerfile \
           -t ghcr.io/moonlightnexus/openai-gateway-bedrock:latest \
           .
-          docker tag openai-gateway-bedrock:latest ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
           docker push ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
             
