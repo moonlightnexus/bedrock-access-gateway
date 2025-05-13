@@ -24,9 +24,7 @@ jobs:
       - name: Build Docker image with secrets as build args      
         run: |
           # Build the Docker image with build arguments
-          
-          docker build \
-            -t openai-gateway-bedrock src/Dockerfile
+          docker build -f ./src/Dockerfile -t ghcr.io/moonlightnexus/openai-gateway-bedrock:latest .
           docker tag openai-gateway-bedrock:latest ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
           docker push ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
             
