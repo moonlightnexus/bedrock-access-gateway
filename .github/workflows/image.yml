@@ -1,0 +1,32 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_dev:
+    name: Build and Deploy to Dev
+    runs-on: ubuntu-latest
+   
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+
+      - name: Build Docker image with secrets as build args      
+        run: |
+          # Build the Docker image with build arguments
+          
+          docker build \
+            -t openai-gateway-bedrock ./src/Dockerfile
+          docker tag openai-gateway-bedrock:latest ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
+          docker push ghcr.io/moonlightnexus/openai-gateway-bedrock:latest
+            
